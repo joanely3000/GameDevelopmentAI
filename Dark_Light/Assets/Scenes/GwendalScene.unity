@@ -25278,8 +25278,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 12651461}
   - {fileID: 859099099}
+  - {fileID: 12651461}
   - {fileID: 1928325506}
   m_Father: {fileID: 1110998244}
   m_RootOrder: 5
@@ -44482,10 +44482,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1896205685}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e10f91a64bd2eb94b9def970f6fc1e6a, type: 3}
+  m_Script: {fileID: 11500000, guid: 4937dee3e79680149abfaf048656380e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PlayerModel: {fileID: 1264172353248072738, guid: c65fa2b37584de447829cb5635f6629b,
+  PlayerModel: {fileID: 1264172353248072738, guid: 1f805ec238f56aa408294da8a4bc5cff,
     type: 3}
   SpawnPoints:
   - {fileID: 312527827}
