@@ -33,9 +33,9 @@ public class PlayerController : MonoBehaviour
 
     }
 
-    void OnCollisionEnter(Collision other)
+    void OnTriggerStay(Collider other)
     {
-        Debug.Log(other.gameObject.name);
+        Debug.Log(other.gameObject.tag);
     }
 
     public IEnumerator __Ahead(float distance)
