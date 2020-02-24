@@ -7,7 +7,7 @@ public class PlayerController : MonoBehaviour
     private BaseAI ai = null;
     private float Yposition = 0.25f;
 
-    private float walkSpeed = 1.0f;
+    public float walkSpeed = 1.0f;
     private float mapSize = 25.0f;
     private float RotationSpeed = 180.0f;
 

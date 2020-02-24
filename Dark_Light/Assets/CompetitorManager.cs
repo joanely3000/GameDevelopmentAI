@@ -4,8 +4,13 @@ using UnityEngine;
 
 public class CompetitorManager : MonoBehaviour
 {
-
+    [Header("Player Controller")]
     public GameObject PlayerModel = null;
+
+    [Header("Game Properties")]
+    public int numPlayers = 4;
+
+    [Header("Spawn Points")]
     public Transform[] SpawnPoints = null;
 
     private List<PlayerController> playerList = new List<PlayerController>();
@@ -14,12 +19,12 @@ public class CompetitorManager : MonoBehaviour
     {
         BaseAI[] aiArray = new BaseAI[] {
             new GwendalAI(),
-            new GwendalAI(),
-            new GwendalAI(),
-            new GwendalAI()
+            new JoanAI(),
+            new JoanAI(),
+            new JoanAI()
         };
 
-        for (int i = 0; i < 4; i++)
+        for (int i = 0; i < numPlayers; i++)
         {
             GameObject player = Instantiate(PlayerModel, SpawnPoints[i].position, SpawnPoints[i].rotation);
             PlayerController playerController = player.GetComponent<PlayerController>();

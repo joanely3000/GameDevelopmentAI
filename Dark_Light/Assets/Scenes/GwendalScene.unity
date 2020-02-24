@@ -48541,10 +48541,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1896205685}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fc127c458e1e4684e892c047261b43f8, type: 3}
+  m_Script: {fileID: 11500000, guid: 0e6e3010f3232ce4c870dbfb29f432f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PlayerModel: {fileID: 1264172353248072738, guid: b91a863815ac45e448ec71c5534c08c9,
+  PlayerModel: {fileID: 1480848432219437823, guid: dc2f9a9b8e89ec249a29d00fd8abcf27,
     type: 3}
   SpawnPoints:
   - {fileID: 312527827}
