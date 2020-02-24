@@ -9,6 +9,7 @@ public class CompetitorManager : MonoBehaviour
 
     [Header("Game Properties")]
     public int numPlayers = 4;
+    public float mapSize = 25f;
 
     [Header("Spawn Points")]
     public Transform[] SpawnPoints = null;

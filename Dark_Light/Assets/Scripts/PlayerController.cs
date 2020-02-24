@@ -38,6 +38,12 @@ public class PlayerController : MonoBehaviour
         Debug.Log(other.gameObject.tag);
     }
 
+    #region getters & setters
+
+    public void setMapSize(float size) {mapSize = size;}
+
+    #endregion
+
     public IEnumerator __Ahead(float distance)
     {
         int numFrames = (int)(distance / (walkSpeed * Time.fixedDeltaTime));
