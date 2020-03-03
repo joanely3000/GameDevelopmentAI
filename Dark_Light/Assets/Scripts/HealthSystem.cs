@@ -10,7 +10,7 @@ public class HealthSystem : MonoBehaviour
     private int damageTaken = 20;
     private int healTaken = 15;
     private float cooldown = 3; //time the player has to wait out of light for healing
-    private float cdTimer = 0; //cd timer
+    private float cdTimer; //cd timer
     private GameObject enemy;
 
     // Start is called before the first frame update
@@ -37,7 +37,7 @@ public class HealthSystem : MonoBehaviour
     {
         if (/*enemy.GetComponent<PlayerLight>().visibleEnemies.Contains(this.GetComponent<Transform>()) &&*/ currentHealth>0) //In light
         {
-
+            cdTimer = 0;
             currentHealth -= Time.deltaTime * damageTaken;
             
         }
