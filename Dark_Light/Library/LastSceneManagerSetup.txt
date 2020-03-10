@@ -1,5 +1,5 @@
 sceneSetups:
-- path: Assets/Scenes/GwendalScene.unity
+- path: Assets/Scenes/JoanScene.unity
   isLoaded: 1
   isActive: 1
   isSubScene: 0

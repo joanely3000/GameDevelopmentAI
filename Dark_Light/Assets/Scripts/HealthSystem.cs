@@ -4,44 +4,63 @@ using UnityEngine;
 
 public class HealthSystem : MonoBehaviour
 {
-    
-    private float health=100f;
-    public float currentHealth=100f;
-    private int damageTaken = 20;
+    //Public Variables
+    public float health=100f;
+    public float currentHealth;
+    public float cooldown = 3; //time the player has to wait out of light for healing
+
+    public int damageTaken = 20;
+
+    public bool takingDamage;
+
+    //Private Variables
     private int healTaken = 15;
-    private float cooldown = 3; //time the player has to wait out of light for healing
-    private float cdTimer; //cd timer
+    
+    public float cdTimer; //cd timer
+
     private GameObject enemy;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
-
-        if (this.name == "Player")
-        {
-            enemy = GameObject.Find("Player2");
-        }
-        else
-        {
-            enemy = GameObject.Find("Player");
-        }
+        currentHealth = health;
     }
 
     // Update is called once per frame
     void Update()
     {
-
+        if (cdTimer > 0)
+        {
+            cdTimer -= Time.deltaTime;
+        }
+        else
+        {
+            if (currentHealth < health)
+            {
+                currentHealth += healTaken * Time.deltaTime;
+                if (currentHealth > health)
+                {
+                    currentHealth = health;
+                }
+            }
+        }
     }
 
     public void GetDamage()
     {
+        cdTimer = 0;
+        currentHealth -= Time.deltaTime * damageTaken;
+
+        if (currentHealth <= 0)
+        {
+            Destroy(gameObject);
+        }
+
         if (/*enemy.GetComponent<PlayerLight>().visibleEnemies.Contains(this.GetComponent<Transform>()) &&*/ currentHealth>0) //In light
         {
-            cdTimer = 0;
-            currentHealth -= Time.deltaTime * damageTaken;
             
         }
-        else if(currentHealth>0 && currentHealth<health)
+        /*else if(currentHealth>0 && currentHealth<health)
         {
             if (cdTimer < 1)
             {
@@ -53,7 +72,18 @@ public class HealthSystem : MonoBehaviour
                 if (currentHealth > health) currentHealth = health;
             }
             
-        }
-     
+        }*/
+    }
+
+    public void SetTakingDamage(bool b)
+    {
+        takingDamage = b;
+    }
+
+    public bool GetTakingDamage() { return takingDamage; }
+
+    public void SetMaximumCDTimer()
+    {
+        cdTimer = cooldown;
     }
 }
