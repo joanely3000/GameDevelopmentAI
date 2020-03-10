@@ -60,7 +60,7 @@ public class PlayerController : MonoBehaviour
     public List<Transform> visibleEnemies = new List<Transform>();
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         viewMesh = new Mesh();
         viewMesh.name = "View Mesh";
@@ -77,6 +77,14 @@ public class PlayerController : MonoBehaviour
     public void StartBattle()
     {
         StartCoroutine(ai.RunAI());
+    }
+
+    private void Update()
+    {
+        for (int i = 0; i < visibleEnemies.Count; i++)
+        {
+            visibleEnemies[i].GetComponent<HealthSystem>().GetDamage();
+        }
     }
 
     // Update is called once per frame

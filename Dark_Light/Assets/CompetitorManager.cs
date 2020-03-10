@@ -13,6 +13,7 @@ public class CompetitorManager : MonoBehaviour
 
     [Header("Spawn Points")]
     public Transform[] SpawnPoints = null;
+    public Material[] Materials;
 
     private List<PlayerController> playerList = new List<PlayerController>();
     // Start is called before the first frame update
@@ -29,6 +30,7 @@ public class CompetitorManager : MonoBehaviour
         {
             GameObject player = Instantiate(PlayerModel, SpawnPoints[i].position, SpawnPoints[i].rotation);
             PlayerController playerController = player.GetComponent<PlayerController>();
+            playerController.viewMeshFilter.GetComponent<MeshRenderer>().material = Materials[i];
             playerController.SetAI(aiArray[i]);
             playerList.Add(playerController);
         }

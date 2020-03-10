@@ -92,8 +92,8 @@ GameObject:
   - component: {fileID: 5101160802703302144}
   - component: {fileID: 3720364954240939942}
   - component: {fileID: 1566460620712771650}
-  - component: {fileID: 1566460620712771649}
-  - component: {fileID: 1566460620712771651}
+  - component: {fileID: 2043623775}
+  - component: {fileID: 507916182556259882}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -193,7 +193,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
---- !u!114 &1566460620712771649
+--- !u!114 &2043623775
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -202,15 +202,29 @@ MonoBehaviour:
   m_GameObject: {fileID: 9155401670023043941}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dc9aab2ebbf5b4541bc42008bc4496ea, type: 3}
+  m_Script: {fileID: 11500000, guid: 6f4f290c49d29d54a9cb60a3eaaa7f6a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  viewRadius: 15
-  viewAngle: 90
+  currentHealth: 100
+--- !u!114 &507916182556259882
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9155401670023043941}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e35a2231245e5046813ac874d01e9ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  walkSpeed: 10
+  viewMeshFilter: {fileID: 531570727}
   meshResolution: 1
   edgeResolveIterations: 4
   edgeDstThreshold: 0.5
-  viewMeshFilter: {fileID: 531570727}
+  viewRadius: 15
+  viewAngle: 90
   walls:
     serializedVersion: 2
     m_Bits: 256
@@ -218,16 +232,3 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 512
   visibleEnemies: []
---- !u!114 &1566460620712771651
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9155401670023043941}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c157c361c7663ff47ae3a77f2855b19d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 10
