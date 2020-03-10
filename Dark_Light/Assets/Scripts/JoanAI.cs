@@ -10,10 +10,10 @@ public class JoanAI : BaseAI
         {
             yield return Ahead(5);
             yield return TurnRight(90);
-            yield return Ahead(2);
+            /*yield return Ahead(2);
             yield return TurnLeft(180);
             yield return Left(4);
-            yield return TurnRight(90);
+            yield return TurnRight(90);*/
         }
     }
 }
