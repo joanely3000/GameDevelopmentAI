@@ -6,15 +6,19 @@ using UnityEngine.UI;
 [ExecuteInEditMode]
 public class ProgressBar : MonoBehaviour
 {
-    public int max;
-    public int current;
     public Image mask;
     public Text lifeText;
+    public HealthSystem healthSystem;
 
     // Start is called before the first frame update
     void Start()
     {
         
+    }
+
+    public void setHealthSystem(HealthSystem healthSystem)
+    {
+        this.healthSystem = healthSystem;
     }
 
     // Update is called once per frame
@@ -25,8 +29,9 @@ public class ProgressBar : MonoBehaviour
 
     void GetCurrentFill ()
     {
-        float fillAmount = (float)current / (float)max;
+        Debug.Log(healthSystem.currentHealth);
+        float fillAmount = (float)healthSystem.currentHealth / (float)healthSystem.health;
         mask.fillAmount = fillAmount;
-        lifeText.text = current + "/" + max;
+        lifeText.text = (int) healthSystem.currentHealth + "/" + healthSystem.health;
     }
 }
