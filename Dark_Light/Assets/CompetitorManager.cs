@@ -15,8 +15,6 @@ public class CompetitorManager : MonoBehaviour
     public Transform[] SpawnPoints = null;
     public Material[] Materials;
 
-    private string[] names = { "GwendalAI", "JoanAI", "JoanAI", "JoanAI" };
-
     private List<PlayerController> playerList = new List<PlayerController>();
     // Start is called before the first frame update
     void Start()
@@ -31,7 +29,6 @@ public class CompetitorManager : MonoBehaviour
         for (int i = 0; i < numPlayers; i++)
         {
             GameObject player = Instantiate(PlayerModel, SpawnPoints[i].position, SpawnPoints[i].rotation);
-            player.name = names[i];
             PlayerController playerController = player.GetComponent<PlayerController>();
             playerController.viewMeshFilter.GetComponent<MeshRenderer>().material = Materials[i];
             playerController.SetAI(aiArray[i]);

@@ -56,10 +56,8 @@ public class PlayerController : MonoBehaviour
     public LayerMask walls; //Walls LayerMask
     public LayerMask players; //Players Layermask
 
-    //[HideInInspector]
+    [HideInInspector]
     public List<Transform> visibleEnemies = new List<Transform>();
-
-    private List<HealthSystem> enemiesExitingLight = new List<HealthSystem>();
 
     // Start is called before the first frame update
     void Awake()
@@ -81,12 +79,12 @@ public class PlayerController : MonoBehaviour
         StartCoroutine(ai.RunAI());
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
-        /*for (int i = 0; i < visibleEnemies.Count; i++)
+        for (int i = 0; i < visibleEnemies.Count; i++)
         {
             visibleEnemies[i].GetComponent<HealthSystem>().GetDamage();
-        }*/
+        }
     }
 
     // Update is called once per frame
@@ -194,17 +192,12 @@ public class PlayerController : MonoBehaviour
     #region Functions
     private void FindVisibleTargets()
     {
-        //enemiesExitingLight = visibleEnemies;
         visibleEnemies.Clear();
 
         Collider[] targets = Physics.OverlapSphere(transform.position, viewRadius, players); //Enemies in range
 
         for (int i = 0; i < targets.Length; i++)
         {
-            if(targets[i].gameObject == gameObject)
-            {
-                continue;
-            }
             Transform target = targets[i].transform;
             Vector3 dirToTarget = (target.position - transform.position).normalized; //Direction to the enemy
 
@@ -214,24 +207,10 @@ public class PlayerController : MonoBehaviour
 
                 if (!Physics.Raycast(transform.position, dirToTarget, distToTarget, walls)) //If there is no obstacle between the player and the enemy
                 {
-                    Debug.Log(target.name + "Has entered the light");
-
                     visibleEnemies.Add(target);
-                    
-                    HealthSystem targetHS = target.GetComponent<HealthSystem>();
-                    targetHS.GetDamage();
-                    targetHS.SetMaximumCDTimer();
-                    //targetHS.SetTakingDamage(true);
-                    //enemiesExitingLight.Remove(target.GetComponent<HealthSystem>());
                 }
             }
         }
-        /*for (int j = 0; j < enemiesExitingLight.Count; j++)
-        {
-            Debug.Log(enemiesExitingLight[j].name + "Has exited the light");
-            enemiesExitingLight[j].SetTakingDamage(false);
-            enemiesExitingLight[j].SetMaximumCDTimer();
-        }*/
     }
 
     private void DrawLight()
