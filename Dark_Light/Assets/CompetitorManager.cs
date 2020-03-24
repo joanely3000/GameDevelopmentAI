@@ -17,6 +17,7 @@ public class CompetitorManager : MonoBehaviour
 
     public Transform[] UIPosition = null;
     public GameObject PlayerUI;
+    public GameObject HealthUIPlace;
 
     private List<PlayerController> playerList = new List<PlayerController>();
     // Start is called before the first frame update
@@ -31,13 +32,23 @@ public class CompetitorManager : MonoBehaviour
 
         for (int i = 0; i < numPlayers; i++)
         {
+            //Instantiate player
             GameObject player = Instantiate(PlayerModel, SpawnPoints[i].position, SpawnPoints[i].rotation);
-            Debug.Log(i);
+
+            //Instantiate Player UI
             GameObject playerUI = Instantiate(PlayerUI);
+            playerUI.transform.parent = HealthUIPlace.transform;
             playerUI.GetComponentInChildren<ProgressBar>().setHealthSystem(player.GetComponent<HealthSystem>());
+
+
+            //Set the color for the light of the player
             PlayerController playerController = player.GetComponent<PlayerController>();
             playerController.viewMeshFilter.GetComponent<MeshRenderer>().material = Materials[i];
+
+            //Set the player AI
             playerController.SetAI(aiArray[i]);
+
+            //Add to the player list
             playerList.Add(playerController);
         }
     }

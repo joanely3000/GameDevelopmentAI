@@ -111,15 +111,7 @@ public class PlayerController : MonoBehaviour
     #region Coroutines
     public IEnumerator __Ahead(float distance)
     {
-        Vector3 destination = transform.position + transform.forward * distance;
-        agent.SetDestination(destination);
-
-        while(Vector3.Distance(transform.position, destination) < .2)
-        {
-            yield return new WaitForFixedUpdate();
-        }
-
-        /*int numFrames = (int)(distance / (walkSpeed * Time.fixedDeltaTime));
+        int numFrames = (int)(distance / (walkSpeed * Time.fixedDeltaTime));
         for (int f = 0; f < numFrames; f++)
         {
             transform.Translate(new Vector3(0f, Yposition, walkSpeed * Time.fixedDeltaTime), Space.Self);
@@ -127,7 +119,7 @@ public class PlayerController : MonoBehaviour
             transform.position = clampedPosition;
  
             yield return new WaitForFixedUpdate();
-        }*/
+        }
     }
 
     public IEnumerator __Back(float distance)
