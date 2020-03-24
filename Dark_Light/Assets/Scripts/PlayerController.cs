@@ -62,6 +62,10 @@ public class PlayerController : MonoBehaviour
     [HideInInspector]
     public List<Transform> visibleEnemies = new List<Transform>();
 
+    private bool hasDestination;
+
+    private Vector3 destination;
+
     // Start is called before the first frame update
     void Awake()
     {
@@ -105,6 +109,17 @@ public class PlayerController : MonoBehaviour
     #region getters & setters
 
     public void setMapSize(float size) {mapSize = size;}
+
+    public bool getHasDestination() { return hasDestination; }
+
+    public void setHasDestination(bool value) { hasDestination = value; }
+
+    public Vector3 getDestination() { return destination; }
+
+    public void setDestination(Vector3 position) { 
+        destination = position;
+        hasDestination = true;
+    }
 
     #endregion
 
@@ -203,15 +218,18 @@ public class PlayerController : MonoBehaviour
         for (int i = 0; i < targets.Length; i++)
         {
             Transform target = targets[i].transform;
-            Vector3 dirToTarget = (target.position - transform.position).normalized; //Direction to the enemy
-
-            if (Vector3.Angle(transform.forward, dirToTarget) < viewAngle / 2) //If the enemy is in the view angle
+            if(target != transform)
             {
-                float distToTarget = Vector3.Distance(transform.position, target.position); //Distance between the player and the enemy
+                Vector3 dirToTarget = (target.position - transform.position).normalized; //Direction to the enemy
 
-                if (!Physics.Raycast(transform.position, dirToTarget, distToTarget, walls)) //If there is no obstacle between the player and the enemy
+                if (Vector3.Angle(transform.forward, dirToTarget) < viewAngle / 2) //If the enemy is in the view angle
                 {
-                    visibleEnemies.Add(target);
+                    float distToTarget = Vector3.Distance(transform.position, target.position); //Distance between the player and the enemy
+
+                    if (!Physics.Raycast(transform.position, dirToTarget, distToTarget, walls)) //If there is no obstacle between the player and the enemy
+                    {
+                        visibleEnemies.Add(target);
+                    }
                 }
             }
         }
@@ -325,5 +343,14 @@ public class PlayerController : MonoBehaviour
 
         return new EdgeInfo(minPoint, maxPoint);
     }
+
+    public void GoToDestination()
+    {
+        if (hasDestination)
+        {
+            agent.SetDestination(destination);
+        }
+    }
+
     #endregion
 }

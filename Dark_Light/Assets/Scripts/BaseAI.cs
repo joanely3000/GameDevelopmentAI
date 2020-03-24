@@ -3,4 +3,17 @@
     public IEnumerator Right(float distance)     {         yield return Player.__Right(distance);     }      public IEnumerator TurnLeft(float angle)     {         yield return Player.__TurnLeft(angle);     }      public IEnumerator TurnRight(float angle)     {         yield return Player.__TurnRight(angle);     }      public virtual IEnumerator RunAI()
     {
         yield return null;
-    } }
+    }
+
+    #region Functions      public bool CheckHasDestination()
+    {
+        return Player.getHasDestination();
+    }      public void SetDestination(Vector3 destination)
+    {
+        Player.setDestination(destination);
+    } 
+    public void GoToDestination()
+    {
+        Player.GoToDestination();
+    }
+    #endregion }

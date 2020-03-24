@@ -53,15 +53,18 @@ public class PlayerLight : MonoBehaviour
         for (int i = 0; i < targets.Length; i++)
         {
             Transform target = targets[i].transform;
-            Vector3 dirToTarget = (target.position - transform.position).normalized; //Direction to the enemy
-
-            if(Vector3.Angle(transform.forward, dirToTarget) < viewAngle / 2) //If the enemy is in the view angle
+            if(target != transform)
             {
-                float distToTarget = Vector3.Distance(transform.position, target.position); //Distance between the player and the enemy
+                Vector3 dirToTarget = (target.position - transform.position).normalized; //Direction to the enemy
 
-                if(!Physics.Raycast(transform.position, dirToTarget, distToTarget, walls)) //If there is no obstacle between the player and the enemy
+                if (Vector3.Angle(transform.forward, dirToTarget) < viewAngle / 2) //If the enemy is in the view angle
                 {
-                    visibleEnemies.Add(target);
+                    float distToTarget = Vector3.Distance(transform.position, target.position); //Distance between the player and the enemy
+
+                    if (!Physics.Raycast(transform.position, dirToTarget, distToTarget, walls)) //If there is no obstacle between the player and the enemy
+                    {
+                        visibleEnemies.Add(target);
+                    }
                 }
             }
         }

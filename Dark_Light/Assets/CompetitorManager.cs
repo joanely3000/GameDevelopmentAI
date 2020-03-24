@@ -20,6 +20,8 @@ public class CompetitorManager : MonoBehaviour
     public GameObject HealthUIPlace;
 
     private List<PlayerController> playerList = new List<PlayerController>();
+    private string[] names = { "Gwendal", "Joan", "Jesus", "Random" };
+
     // Start is called before the first frame update
     void Start()
     {
@@ -34,6 +36,7 @@ public class CompetitorManager : MonoBehaviour
         {
             //Instantiate player
             GameObject player = Instantiate(PlayerModel, SpawnPoints[i].position, SpawnPoints[i].rotation);
+            player.name = names[i];
 
             //Instantiate Player UI
             GameObject playerUI = Instantiate(PlayerUI);

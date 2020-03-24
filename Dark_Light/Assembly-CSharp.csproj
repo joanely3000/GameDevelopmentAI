@@ -64,7 +64,18 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\CompetitorManager.cs" />
+    <Compile Include="Assets\ProCore\ProGrids\Classes\pg_Constant.cs" />
+    <Compile Include="Assets\ProCore\ProGrids\Classes\pg_Enum.cs" />
+    <Compile Include="Assets\ProCore\ProGrids\Classes\pg_IconUtility.cs" />
+    <Compile Include="Assets\ProCore\ProGrids\Classes\pg_IgnoreSnapAttribute.cs" />
+    <Compile Include="Assets\ProCore\ProGrids\Classes\pg_SceneMeshRender.cs" />
+    <Compile Include="Assets\ProCore\ProGrids\Classes\pg_Util.cs" />
+    <Compile Include="Assets\ProCore\ProGrids\MonoBehaviour\pg_IgnoreSnap.cs" />
     <Compile Include="Assets\Scripts\BaseAI.cs" />
+    <Compile Include="Assets\Scripts\Graph\Graph.cs" />
+    <Compile Include="Assets\Scripts\Graph\Heap.cs" />
+    <Compile Include="Assets\Scripts\Graph\Node.cs" />
+    <Compile Include="Assets\Scripts\Graph\NodeEditor.cs" />
     <Compile Include="Assets\Scripts\GwendalAI.cs" />
     <Compile Include="Assets\Scripts\HealthSystem.cs" />
     <Compile Include="Assets\Scripts\JoanAI.cs" />
@@ -73,7 +84,10 @@
     <Compile Include="Assets\Scripts\ProgressBar.cs" />
     <Compile Include="Assets\Scripts\TemporaryMovement.cs" />
     <Compile Include="Assets\TutorialInfo\Scripts\Readme.cs" />
+    <None Include="Assets\ProCore\ProGrids\About\pc_AboutEntry_ProGrids.txt" />
+    <None Include="Assets\ProCore\ProGrids\Shader\pg_GridShader.shader" />
     <None Include="Assets\Easy DG Assets 1 - Wood + Stone\README.txt" />
+    <None Include="Assets\ProCore\ProGrids\About\changelog.txt" />
     <Reference Include="Unity.RenderPipeline.Universal.ShaderLibrary">
       <HintPath>D:/Uni/Erasmus/Game Development/Projects/GameDevelopmentAI/Dark_Light/Library/ScriptAssemblies/Unity.RenderPipeline.Universal.ShaderLibrary.dll</HintPath>
     </Reference>
@@ -127,6 +141,18 @@
     </Reference>
     <Reference Include="UnityEditor.UI">
       <HintPath>D:/Uni/Erasmus/Game Development/Projects/GameDevelopmentAI/Dark_Light/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.ProBuilder">
+      <HintPath>D:/Uni/Erasmus/Game Development/Projects/GameDevelopmentAI/Dark_Light/Library/ScriptAssemblies/Unity.ProBuilder.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.ProBuilder.Editor">
+      <HintPath>D:/Uni/Erasmus/Game Development/Projects/GameDevelopmentAI/Dark_Light/Library/ScriptAssemblies/Unity.ProBuilder.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.ProBuilder.AssetIdRemapUtility">
+      <HintPath>D:/Uni/Erasmus/Game Development/Projects/GameDevelopmentAI/Dark_Light/Library/ScriptAssemblies/Unity.ProBuilder.AssetIdRemapUtility.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.ProBuilder.AddOns.Editor">
+      <HintPath>D:/Uni/Erasmus/Game Development/Projects/GameDevelopmentAI/Dark_Light/Library/ScriptAssemblies/Unity.ProBuilder.AddOns.Editor.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.AIModule">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2019.3.0f6/Editor/Data/Managed/UnityEngine/UnityEngine.AIModule.dll</HintPath>
