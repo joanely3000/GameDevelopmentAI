@@ -8,22 +8,53 @@ public class JoanAI : BaseAI
     {
         while (true)
         {
-            if (!CheckHasDestination())
+            switch (CheckPlayerState())
             {
-                Debug.Log("Cojo un destino");
-                SetDestination(GetRandomDestination().position);
-                yield return null;
+                case PlayerState.CHASING:
+                    break;
+
+                case PlayerState.ESCAPING:
+                    if (CheckIfEnemiesNear())
+                    {
+                        if (!CheckHasDestination())
+                        {
+                            SetEscapeDestination();
+                        }
+                        else
+                        {
+                            GoToDestination();
+                        }
+                    }
+                    else
+                    {
+                        SetPlayerState(PlayerState.MOVING);
+                    }
+                    break;
+
+                case PlayerState.MOVING:
+                    if (!CheckHasDestination())
+                    {
+                        SetDestination(GetRandomDestination().position);
+                    }
+                    else
+                    {
+                        GoToDestination();
+                    }
+                    break;
+
+                case PlayerState.INLIGHT:
+                    SetPlayerState(PlayerState.ESCAPING);
+                    SetEscapeDestination();
+                    break;
             }
-            else
-            {
-                GoToDestination();
-                yield return null;
-            }
-             /*
-            yield return Ahead(2);
-            yield return TurnLeft(180);
-            yield return Left(4);
-            yield return TurnRight(90);*/
+
+            yield return null;
+
+            /*
+           yield return Ahead(2);
+           yield return TurnLeft(180);
+           yield return Left(4);
+           yield return TurnRight(90);*/
         }
     }
 }

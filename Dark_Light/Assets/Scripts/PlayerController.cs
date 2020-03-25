@@ -3,6 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
+public enum PlayerState
+{
+    MOVING,
+    ESCAPING,
+    CHASING,
+    INLIGHT
+}
+
 public class PlayerController : MonoBehaviour
 {
     #region Structs
@@ -35,45 +43,74 @@ public class PlayerController : MonoBehaviour
     }
     #endregion
 
-    private BaseAI ai = null;
-    private float Yposition = 0.25f;
+    
 
-    public float walkSpeed = 1.0f;
-    private float mapSize = 25.0f;
-    private float RotationSpeed = 180.0f;
-
-    private NavMeshAgent agent;
-
-    public MeshFilter viewMeshFilter;
-    private Mesh viewMesh;
-
-    public float meshResolution;
-    public int edgeResolveIterations;
-    public float edgeDstThreshold;
-
-    public float viewRadius; //Distance the player can see
+    //----------------------------------//
+    //---------Public Variables---------//
+    //----------------------------------//
 
     [Range(0, 360)]
     public float viewAngle; //Angle of vision
+    
+    public float walkSpeed = 1.0f;
+    public float meshResolution;
+    public float edgeDstThreshold; 
+    public float viewRadius; //Distance the player can see
+    public float scapeCircleRadius = 2;
 
+    public int edgeResolveIterations;
+
+    public MeshFilter viewMeshFilter;
+    
     public LayerMask walls; //Walls LayerMask
     public LayerMask players; //Players Layermask
 
     [HideInInspector]
-    public List<Transform> visibleEnemies = new List<Transform>();
+    public List<Transform> inLightEnemies = new List<Transform>();
+
+    //----------------------------------//
+    //--------Private Variables---------//
+    //----------------------------------//
+
+    private List<GameObject> visibleEnemies = new List<GameObject>();
+    private List<GameObject> inRangeEnemies = new List<GameObject>();
+
+    private float mapSize = 25.0f;
+    private float RotationSpeed = 180.0f;
+    private float Yposition = 0.25f;
+    
+    private Mesh viewMesh;
+
+    private BaseAI ai = null;
+    private NavMeshAgent agent;
+
+    private HealthSystem _myHeathSystem;
 
     private bool hasDestination;
 
     private Vector3 destination;
 
+    private GameObject atacker;
+
+    private PlayerState playerState;
+
     // Start is called before the first frame update
     void Awake()
     {
+        //--Create the light--//
         viewMesh = new Mesh();
         viewMesh.name = "View Mesh";
         viewMeshFilter.mesh = viewMesh;
         StartCoroutine(FindVisibleEnemiesWithDelay(.2f));
+
+        //--Set Navmesh Agent--//
         agent = GetComponent<NavMeshAgent>();
+
+        //--Set HealthSystem--//
+        _myHeathSystem = GetComponent<HealthSystem>();
+
+        //--Set Player State--//
+        playerState = PlayerState.MOVING;
     }
 
     public void SetAI(BaseAI _ai)
@@ -89,14 +126,37 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        if (Vector3.Distance(destination, transform.position) < 0.3f)
+        visibleEnemies.Clear();
+
+        for (int i = 0; i < inRangeEnemies.Count; i++)
         {
-            Debug.Log("Soy " + gameObject.name + "Y he llegado a mi destino");
+            Vector3 direction = (inRangeEnemies[i].transform.position - transform.position).normalized;
+            if(Vector3.Angle(transform.forward, direction) <= 30)
+            {
+                visibleEnemies.Add(inRangeEnemies[i]);
+            }
+        }
+
+        if (CheckIfThereAreEnemies())
+        {
+            playerState = PlayerState.ESCAPING;
             hasDestination = false;
         }
-        for (int i = 0; i < visibleEnemies.Count; i++)
+
+        //If the player arrives to the destination 
+        if(Vector3.Distance(transform.position, destination) < 0.2f)
         {
-            visibleEnemies[i].GetComponent<HealthSystem>().GetDamage();
+            hasDestination = false;
+        }
+
+        //Player damaging all the players in his light
+        for (int i = 0; i < inLightEnemies.Count; i++)
+        {
+            float health = inLightEnemies[i].GetComponent<HealthSystem>().GetDamage();
+            if(health <= 0)
+            {
+                inRangeEnemies.Remove(inLightEnemies[i].gameObject);
+            }
         }
     }
 
@@ -106,9 +166,37 @@ public class PlayerController : MonoBehaviour
         DrawLight();
     }
 
-    void OnTriggerStay(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
-        //Debug.Log(other.gameObject.tag);
+        if(other.tag == "Player")
+        {
+            Vector3 dirToTarget = other.transform.position - transform.position;
+            float distToTarget = Vector3.Distance(transform.position, other.transform.position);
+
+            if (!Physics.Raycast(transform.position, dirToTarget, distToTarget, walls))
+            {
+                inRangeEnemies.Add(other.gameObject);
+            }
+        }
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        for (int i = 0; i < inRangeEnemies.Count; i++)
+        {
+            if(inRangeEnemies[i] == null)
+            {
+                inRangeEnemies.Remove(inRangeEnemies[i]);
+            }
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if(other.tag == "Player" && inRangeEnemies.Contains(other.gameObject))
+        {
+            inRangeEnemies.Remove(other.gameObject);
+        }
     }
 
     #region getters & setters
@@ -124,6 +212,17 @@ public class PlayerController : MonoBehaviour
     public void setDestination(Vector3 position) { 
         destination = position;
         hasDestination = true;
+    }
+
+    //-- Checks the player's State --//
+    public PlayerState CheckState()
+    {
+        return playerState;
+    }
+
+    public void SetPlayerState(PlayerState ps)
+    {
+        playerState = ps;
     }
 
     #endregion
@@ -216,7 +315,7 @@ public class PlayerController : MonoBehaviour
     #region Functions
     private void FindVisibleTargets()
     {
-        visibleEnemies.Clear();
+        inLightEnemies.Clear();
 
         Collider[] targets = Physics.OverlapSphere(transform.position, viewRadius, players); //Enemies in range
 
@@ -233,7 +332,8 @@ public class PlayerController : MonoBehaviour
 
                     if (!Physics.Raycast(transform.position, dirToTarget, distToTarget, walls)) //If there is no obstacle between the player and the enemy
                     {
-                        visibleEnemies.Add(target);
+                        inLightEnemies.Add(target);
+                        target.GetComponent<PlayerController>().SetPlayerState(PlayerState.INLIGHT);
                     }
                 }
             }
@@ -357,5 +457,62 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    //-- Checks if the player is seeing an enemy --//
+    public bool CheckIfThereAreEnemies()
+    {
+        return visibleEnemies.Count > 0;
+    }
+
+    //-- Checks if any enemy in range is stronger than the player --//
+    public bool AnyEnemyIsStronger()
+    {
+        for (int i = 0; i < visibleEnemies.Count; i++)
+        {
+            HealthSystem enemyHealth = visibleEnemies[i].GetComponent<HealthSystem>();
+            if(enemyHealth != null && enemyHealth.health > _myHeathSystem.health)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    //-- Sets the destination to a point to escape --//
+    public void SetEscapeDestination()
+    {
+        Debug.Log("Seteando escape destino");
+        Vector3 scapingPosition = GetEscapeDirection();
+        setDestination(transform.position + scapingPosition);
+    }
+
+    //-- Calculates the scaping direction --//
+    public Vector3 GetEscapeDirection()
+    {
+        Vector3 scapeDirection = Vector3.zero;
+
+        for (int i = 0; i < inRangeEnemies.Count; i++)
+        {
+            Vector3 directionToEnemy = inRangeEnemies[i].transform.position - transform.position;
+
+            scapeDirection += directionToEnemy;
+        }
+
+        scapeDirection.Normalize();
+        scapeDirection *= scapeCircleRadius;
+        return FindPositionInNavmesh(scapeDirection *= -1);
+    }
+
+    //-- Finds the destination point in the navmesh --//
+    private Vector3 FindPositionInNavmesh(Vector3 scapeDirection)
+    {
+        Vector2 point = Random.insideUnitCircle * scapeCircleRadius;
+
+        Vector3 randomPos = new Vector3(point.x, 0f, point.y) + scapeDirection;
+
+        NavMeshHit hit;
+        NavMesh.SamplePosition(randomPos, out hit, scapeCircleRadius, NavMesh.AllAreas);
+
+        return hit.position;
+    }
     #endregion
 }

@@ -29,6 +29,7 @@ public class HealthSystem : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        /*
         if (cdTimer > 0)
         {
             cdTimer -= Time.deltaTime;
@@ -43,20 +44,22 @@ public class HealthSystem : MonoBehaviour
                     currentHealth = health;
                 }
             }
-        }
+        }*/
     }
 
-    public void GetDamage()
+    public float GetDamage()
     {
         cdTimer = 0;
         currentHealth -= Time.deltaTime * damageTaken;
 
         if (currentHealth <= 0)
         {
-            Destroy(gameObject);
+            Destroy(gameObject, .5f);
         }
+        return currentHealth;
 
-        if (/*enemy.GetComponent<PlayerLight>().visibleEnemies.Contains(this.GetComponent<Transform>()) &&*/ currentHealth>0) //In light
+        /*if (enemy.GetComponent<PlayerLight>().visibleEnemies.Contains(this.GetComponent<Transform>()) &&
+        currentHealth > 0) //In light
         {
             
         }
