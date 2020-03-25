@@ -64,12 +64,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Editor\PlayerLightEditor.cs" />
-    <Compile Include="Assets\ProCore\ProGrids\About\Editor\pg_AboutWindow.cs" />
-    <Compile Include="Assets\ProCore\ProGrids\Editor\pg_Editor.cs" />
-    <Compile Include="Assets\ProCore\ProGrids\Editor\pg_GridRenderer.cs" />
-    <Compile Include="Assets\ProCore\ProGrids\Editor\pg_ParameterWindow.cs" />
-    <Compile Include="Assets\ProCore\ProGrids\Editor\pg_Preferences.cs" />
-    <Compile Include="Assets\ProCore\ProGrids\Editor\pg_ToggleContent.cs" />
     <Compile Include="Assets\TutorialInfo\Scripts\Editor\ReadmeEditor.cs" />
     <Reference Include="UnityEditor.TestRunner">
       <HintPath>D:/Uni/Erasmus/Game Development/Projects/GameDevelopmentAI/Dark_Light/Library/ScriptAssemblies/UnityEditor.TestRunner.dll</HintPath>
@@ -89,17 +83,8 @@
     <Reference Include="Unity.VSCode.Editor">
       <HintPath>D:/Uni/Erasmus/Game Development/Projects/GameDevelopmentAI/Dark_Light/Library/ScriptAssemblies/Unity.VSCode.Editor.dll</HintPath>
     </Reference>
-    <Reference Include="Unity.ProBuilder">
-      <HintPath>D:/Uni/Erasmus/Game Development/Projects/GameDevelopmentAI/Dark_Light/Library/ScriptAssemblies/Unity.ProBuilder.dll</HintPath>
-    </Reference>
     <Reference Include="Unity.RenderPipelines.Core.Editor">
       <HintPath>D:/Uni/Erasmus/Game Development/Projects/GameDevelopmentAI/Dark_Light/Library/ScriptAssemblies/Unity.RenderPipelines.Core.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.ProBuilder.Editor">
-      <HintPath>D:/Uni/Erasmus/Game Development/Projects/GameDevelopmentAI/Dark_Light/Library/ScriptAssemblies/Unity.ProBuilder.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.ProBuilder.AssetIdRemapUtility">
-      <HintPath>D:/Uni/Erasmus/Game Development/Projects/GameDevelopmentAI/Dark_Light/Library/ScriptAssemblies/Unity.ProBuilder.AssetIdRemapUtility.dll</HintPath>
     </Reference>
     <Reference Include="Unity.RenderPipelines.Core.Runtime">
       <HintPath>D:/Uni/Erasmus/Game Development/Projects/GameDevelopmentAI/Dark_Light/Library/ScriptAssemblies/Unity.RenderPipelines.Core.Runtime.dll</HintPath>
@@ -127,9 +112,6 @@
     </Reference>
     <Reference Include="Unity.RenderPipelines.ShaderGraph.ShaderGraphLibrary">
       <HintPath>D:/Uni/Erasmus/Game Development/Projects/GameDevelopmentAI/Dark_Light/Library/ScriptAssemblies/Unity.RenderPipelines.ShaderGraph.ShaderGraphLibrary.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.ProBuilder.AddOns.Editor">
-      <HintPath>D:/Uni/Erasmus/Game Development/Projects/GameDevelopmentAI/Dark_Light/Library/ScriptAssemblies/Unity.ProBuilder.AddOns.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.ShaderGraph.Editor">
       <HintPath>D:/Uni/Erasmus/Game Development/Projects/GameDevelopmentAI/Dark_Light/Library/ScriptAssemblies/Unity.ShaderGraph.Editor.dll</HintPath>

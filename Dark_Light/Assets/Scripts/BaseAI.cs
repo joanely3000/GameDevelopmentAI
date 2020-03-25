@@ -24,9 +24,14 @@
         return Graph.Instance.returnRandomNode();
     }
 
+    public bool CheckIfVisibleEnemiesNear()
+    {
+        return Player.CheckIfThereAreVisibleEnemies();
+    }
+
     public bool CheckIfEnemiesNear()
     {
-        return Player.CheckIfThereAreEnemies();
+        return Player.CheckIfEnemiesNear();
     }
 
     public bool CheckIfEnemiesAreStronger()
@@ -36,6 +41,7 @@
 
     public void SetEscapeDestination()
     {
+        Debug.Log("Soy " + Player.gameObject.name + ", busco destino de escape");
         Player.SetEscapeDestination();
     }
 

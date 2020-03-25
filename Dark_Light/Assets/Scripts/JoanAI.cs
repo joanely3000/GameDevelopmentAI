@@ -14,20 +14,16 @@ public class JoanAI : BaseAI
                     break;
 
                 case PlayerState.ESCAPING:
+                    Debug.Log("Estoy escapando");
                     if (CheckIfEnemiesNear())
                     {
-                        if (!CheckHasDestination())
-                        {
-                            SetEscapeDestination();
-                        }
-                        else
-                        {
-                            GoToDestination();
-                        }
+                        SetEscapeDestination();
+                        GoToDestination();
                     }
                     else
                     {
                         SetPlayerState(PlayerState.MOVING);
+                        SetDestination(GetRandomDestination().position);
                     }
                     break;
 
@@ -43,6 +39,7 @@ public class JoanAI : BaseAI
                     break;
 
                 case PlayerState.INLIGHT:
+                    Debug.Log("Estoy en la luuus");
                     SetPlayerState(PlayerState.ESCAPING);
                     SetEscapeDestination();
                     break;

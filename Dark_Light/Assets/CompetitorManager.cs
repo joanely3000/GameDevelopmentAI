@@ -40,8 +40,9 @@ public class CompetitorManager : MonoBehaviour
 
             //Instantiate Player UI
             GameObject playerUI = Instantiate(PlayerUI);
-            playerUI.transform.parent = HealthUIPlace.transform;
+            playerUI.transform.SetParent(HealthUIPlace.transform);
             playerUI.GetComponentInChildren<ProgressBar>().setHealthSystem(player.GetComponent<HealthSystem>());
+            playerUI.GetComponentInChildren<ProgressBar>().Name.text = names[i];
 
 
             //Set the color for the light of the player

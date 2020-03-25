@@ -56,7 +56,8 @@ public class PlayerController : MonoBehaviour
     public float meshResolution;
     public float edgeDstThreshold; 
     public float viewRadius; //Distance the player can see
-    public float scapeCircleRadius = 2;
+    public float scapeCircleRadius = 2f;
+    public float triggerSize = 15f;
 
     public int edgeResolveIterations;
 
@@ -93,6 +94,7 @@ public class PlayerController : MonoBehaviour
     private GameObject atacker;
 
     private PlayerState playerState;
+    
 
     // Start is called before the first frame update
     void Awake()
@@ -137,12 +139,6 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        if (CheckIfThereAreEnemies())
-        {
-            playerState = PlayerState.ESCAPING;
-            hasDestination = false;
-        }
-
         //If the player arrives to the destination 
         if(Vector3.Distance(transform.position, destination) < 0.2f)
         {
@@ -153,6 +149,7 @@ public class PlayerController : MonoBehaviour
         for (int i = 0; i < inLightEnemies.Count; i++)
         {
             float health = inLightEnemies[i].GetComponent<HealthSystem>().GetDamage();
+
             if(health <= 0)
             {
                 inRangeEnemies.Remove(inLightEnemies[i].gameObject);
@@ -322,17 +319,17 @@ public class PlayerController : MonoBehaviour
         for (int i = 0; i < targets.Length; i++)
         {
             Transform target = targets[i].transform;
-            if(target != transform)
+            Vector3 dirToTarget = (target.position - transform.position).normalized; //Direction to the enemy
+            float distToTarget = Vector3.Distance(transform.position, target.position); //Distance between the player and the enemy
+
+            if (target != transform)
             {
-                Vector3 dirToTarget = (target.position - transform.position).normalized; //Direction to the enemy
-
-                if (Vector3.Angle(transform.forward, dirToTarget) < viewAngle / 2) //If the enemy is in the view angle
+                if (Vector3.Angle(transform.forward, dirToTarget) < viewAngle / 2 ) //If the enemy is in the view angle
                 {
-                    float distToTarget = Vector3.Distance(transform.position, target.position); //Distance between the player and the enemy
-
-                    if (!Physics.Raycast(transform.position, dirToTarget, distToTarget, walls)) //If there is no obstacle between the player and the enemy
+                    if (!Physics.Raycast(transform.position, dirToTarget, distToTarget, walls) && distToTarget <= viewRadius) //If there is no obstacle between the player and the enemy
                     {
                         inLightEnemies.Add(target);
+                        
                         target.GetComponent<PlayerController>().SetPlayerState(PlayerState.INLIGHT);
                     }
                 }
@@ -458,9 +455,23 @@ public class PlayerController : MonoBehaviour
     }
 
     //-- Checks if the player is seeing an enemy --//
-    public bool CheckIfThereAreEnemies()
+    public bool CheckIfThereAreVisibleEnemies()
     {
         return visibleEnemies.Count > 0;
+    }
+
+    public bool CheckIfEnemiesNear()
+    {
+        for (int i = 0; i < inRangeEnemies.Count; i++)
+        {
+            Vector3 direction = inRangeEnemies[i].transform.position - transform.position;
+            if(!Physics.Raycast(transform.position, direction, triggerSize, walls))
+            {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     //-- Checks if any enemy in range is stronger than the player --//
@@ -480,7 +491,6 @@ public class PlayerController : MonoBehaviour
     //-- Sets the destination to a point to escape --//
     public void SetEscapeDestination()
     {
-        Debug.Log("Seteando escape destino");
         Vector3 scapingPosition = GetEscapeDirection();
         setDestination(transform.position + scapingPosition);
     }

@@ -225,20 +225,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e35a2231245e5046813ac874d01e9ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  viewAngle: 60
   walkSpeed: 10
-  viewMeshFilter: {fileID: 531570727}
   meshResolution: 1
-  edgeResolveIterations: 4
   edgeDstThreshold: 0.5
   viewRadius: 12
-  viewAngle: 60
+  scapeCircleRadius: 2
+  triggerSize: 0
+  edgeResolveIterations: 4
+  viewMeshFilter: {fileID: 531570727}
   walls:
     serializedVersion: 2
     m_Bits: 256
   players:
     serializedVersion: 2
     m_Bits: 512
-  visibleEnemies: []
+  inLightEnemies: []
 --- !u!195 &944975409
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -253,7 +255,7 @@ NavMeshAgent:
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
-  m_StoppingDistance: 0.2
+  m_StoppingDistance: 0.1
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1

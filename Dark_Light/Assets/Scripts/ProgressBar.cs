@@ -8,6 +8,9 @@ public class ProgressBar : MonoBehaviour
 {
     public Image mask;
     public Text lifeText;
+    public Text Name;
+
+    [HideInInspector]
     public HealthSystem healthSystem;
 
     // Start is called before the first frame update

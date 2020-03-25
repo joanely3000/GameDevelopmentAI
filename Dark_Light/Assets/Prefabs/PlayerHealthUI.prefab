@@ -389,6 +389,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mask: {fileID: 8430949548029803097}
   lifeText: {fileID: 7814916953017679122}
+  Name: {fileID: 7896735417631417458}
   healthSystem: {fileID: 0}
 --- !u!1 &7902589629562116715
 GameObject:
