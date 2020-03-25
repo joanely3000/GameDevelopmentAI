@@ -4,18 +4,29 @@ using UnityEngine;
 
 public class Graph : MonoBehaviour
 {
-    public List<NodeEditor> nodes;
+    public List<Transform> nodes;
 
-    List<Node> graph;
-    int graphSize;
+    private int numNodes;
+    private static Graph instance;
+
+    public static Graph Instance
+    {
+        get
+        {
+            return instance;
+        }
+    }
+
 
     private void Awake()
     {
-        createGraph();
+        instance = this;
+        numNodes = nodes.Count;
     }
 
-    void createGraph()
+    public Transform returnRandomNode()
     {
-        graph = new List<Node>();
+        int rand = Random.Range(0, numNodes - 1);
+        return nodes[rand];
     }
 }

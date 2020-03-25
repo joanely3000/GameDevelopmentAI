@@ -100,8 +100,17 @@
     <Reference Include="Unity.VSCode.Editor">
       <HintPath>D:/Uni/Erasmus/Game Development/Projects/GameDevelopmentAI/Dark_Light/Library/ScriptAssemblies/Unity.VSCode.Editor.dll</HintPath>
     </Reference>
+    <Reference Include="Unity.ProBuilder">
+      <HintPath>D:/Uni/Erasmus/Game Development/Projects/GameDevelopmentAI/Dark_Light/Library/ScriptAssemblies/Unity.ProBuilder.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.RenderPipelines.Core.Editor">
       <HintPath>D:/Uni/Erasmus/Game Development/Projects/GameDevelopmentAI/Dark_Light/Library/ScriptAssemblies/Unity.RenderPipelines.Core.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.ProBuilder.Editor">
+      <HintPath>D:/Uni/Erasmus/Game Development/Projects/GameDevelopmentAI/Dark_Light/Library/ScriptAssemblies/Unity.ProBuilder.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.ProBuilder.AssetIdRemapUtility">
+      <HintPath>D:/Uni/Erasmus/Game Development/Projects/GameDevelopmentAI/Dark_Light/Library/ScriptAssemblies/Unity.ProBuilder.AssetIdRemapUtility.dll</HintPath>
     </Reference>
     <Reference Include="Unity.RenderPipelines.Core.Runtime">
       <HintPath>D:/Uni/Erasmus/Game Development/Projects/GameDevelopmentAI/Dark_Light/Library/ScriptAssemblies/Unity.RenderPipelines.Core.Runtime.dll</HintPath>
@@ -130,6 +139,9 @@
     <Reference Include="Unity.RenderPipelines.ShaderGraph.ShaderGraphLibrary">
       <HintPath>D:/Uni/Erasmus/Game Development/Projects/GameDevelopmentAI/Dark_Light/Library/ScriptAssemblies/Unity.RenderPipelines.ShaderGraph.ShaderGraphLibrary.dll</HintPath>
     </Reference>
+    <Reference Include="Unity.ProBuilder.AddOns.Editor">
+      <HintPath>D:/Uni/Erasmus/Game Development/Projects/GameDevelopmentAI/Dark_Light/Library/ScriptAssemblies/Unity.ProBuilder.AddOns.Editor.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.ShaderGraph.Editor">
       <HintPath>D:/Uni/Erasmus/Game Development/Projects/GameDevelopmentAI/Dark_Light/Library/ScriptAssemblies/Unity.ShaderGraph.Editor.dll</HintPath>
     </Reference>
@@ -141,18 +153,6 @@
     </Reference>
     <Reference Include="UnityEditor.UI">
       <HintPath>D:/Uni/Erasmus/Game Development/Projects/GameDevelopmentAI/Dark_Light/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.ProBuilder">
-      <HintPath>D:/Uni/Erasmus/Game Development/Projects/GameDevelopmentAI/Dark_Light/Library/ScriptAssemblies/Unity.ProBuilder.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.ProBuilder.Editor">
-      <HintPath>D:/Uni/Erasmus/Game Development/Projects/GameDevelopmentAI/Dark_Light/Library/ScriptAssemblies/Unity.ProBuilder.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.ProBuilder.AssetIdRemapUtility">
-      <HintPath>D:/Uni/Erasmus/Game Development/Projects/GameDevelopmentAI/Dark_Light/Library/ScriptAssemblies/Unity.ProBuilder.AssetIdRemapUtility.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.ProBuilder.AddOns.Editor">
-      <HintPath>D:/Uni/Erasmus/Game Development/Projects/GameDevelopmentAI/Dark_Light/Library/ScriptAssemblies/Unity.ProBuilder.AddOns.Editor.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.AIModule">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2019.3.0f6/Editor/Data/Managed/UnityEngine/UnityEngine.AIModule.dll</HintPath>

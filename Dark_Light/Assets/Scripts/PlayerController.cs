@@ -89,6 +89,11 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
+        if (Vector3.Distance(destination, transform.position) < 0.3f)
+        {
+            Debug.Log("Soy " + gameObject.name + "Y he llegado a mi destino");
+            hasDestination = false;
+        }
         for (int i = 0; i < visibleEnemies.Count; i++)
         {
             visibleEnemies[i].GetComponent<HealthSystem>().GetDamage();
@@ -103,7 +108,7 @@ public class PlayerController : MonoBehaviour
 
     void OnTriggerStay(Collider other)
     {
-        Debug.Log(other.gameObject.tag);
+        //Debug.Log(other.gameObject.tag);
     }
 
     #region getters & setters

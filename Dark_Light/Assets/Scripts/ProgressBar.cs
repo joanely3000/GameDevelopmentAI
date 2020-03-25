@@ -29,7 +29,6 @@ public class ProgressBar : MonoBehaviour
 
     void GetCurrentFill ()
     {
-        Debug.Log(healthSystem.currentHealth);
         float fillAmount = (float)healthSystem.currentHealth / (float)healthSystem.health;
         mask.fillAmount = fillAmount;
         lifeText.text = (int) healthSystem.currentHealth + "/" + healthSystem.health;

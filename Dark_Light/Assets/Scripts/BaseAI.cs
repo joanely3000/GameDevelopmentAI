@@ -16,4 +16,9 @@
     {
         Player.GoToDestination();
     }
+
+    public Transform GetRandomDestination()
+    {
+        return Graph.Instance.returnRandomNode();
+    }
     #endregion }

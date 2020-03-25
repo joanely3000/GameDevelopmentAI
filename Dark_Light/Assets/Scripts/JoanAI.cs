@@ -11,12 +11,11 @@ public class JoanAI : BaseAI
             if (!CheckHasDestination())
             {
                 Debug.Log("Cojo un destino");
-                SetDestination(new Vector3(0f, 0f, 0f));
+                SetDestination(GetRandomDestination().position);
                 yield return null;
             }
             else
             {
-                Debug.Log("Voy a mi destino");
                 GoToDestination();
                 yield return null;
             }

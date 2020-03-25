@@ -48,7 +48,6 @@ public class HealthSystem : MonoBehaviour
 
     public void GetDamage()
     {
-        Debug.Log("Llamado en " + gameObject.name);
         cdTimer = 0;
         currentHealth -= Time.deltaTime * damageTaken;
 
