@@ -18,13 +18,17 @@ public class CompetitorManager : MonoBehaviour
     public Transform[] UIPosition = null;
     public GameObject PlayerUI;
     public GameObject HealthUIPlace;
+    public GameObject playerCamera;
 
     private List<PlayerController> playerList = new List<PlayerController>();
     private string[] names = { "Gwendal", "Joan", "Jesus", "Random" };
+    private CameraController cameraController;
 
     // Start is called before the first frame update
     void Start()
     {
+        cameraController = GetComponent<CameraController>();
+
         BaseAI[] aiArray = new BaseAI[] {
             new GwendalAI(),
             new JoanAI(),
@@ -44,6 +48,17 @@ public class CompetitorManager : MonoBehaviour
             playerUI.GetComponentInChildren<ProgressBar>().setHealthSystem(player.GetComponent<HealthSystem>());
             playerUI.GetComponentInChildren<ProgressBar>().Name.text = names[i];
 
+            //Set Players cameras
+            GameObject cam = Instantiate(playerCamera, player.transform.position, player.transform.rotation);
+
+            cameraController.AddCamera(cam);
+
+            FollowPlayer fp = cam.GetComponent<FollowPlayer>();
+            if(fp != null){ 
+                fp.SetPlayer(player); }
+
+            cam.GetComponent<AudioListener>().enabled = false;
+            cam.SetActive(false);
 
             //Set the color for the light of the player
             PlayerController playerController = player.GetComponent<PlayerController>();

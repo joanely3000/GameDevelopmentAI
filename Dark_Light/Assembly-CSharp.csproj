@@ -65,6 +65,8 @@
   <ItemGroup>
     <Compile Include="Assets\CompetitorManager.cs" />
     <Compile Include="Assets\Scripts\BaseAI.cs" />
+    <Compile Include="Assets\Scripts\CameraController.cs" />
+    <Compile Include="Assets\Scripts\FollowPlayer.cs" />
     <Compile Include="Assets\Scripts\Graph\Graph.cs" />
     <Compile Include="Assets\Scripts\Graph\Heap.cs" />
     <Compile Include="Assets\Scripts\Graph\Node.cs" />
