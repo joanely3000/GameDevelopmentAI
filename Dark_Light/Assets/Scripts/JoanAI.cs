@@ -20,6 +20,16 @@ public class JoanAI : BaseAI
                         SetAgentVelocity(Vector3.zero);
                     }
 
+                    if (ChaseTargetExists())
+                    {
+                        SetDestination(GetChasePosition());
+                    }
+                    else
+                    {
+                        SetPlayerState(PlayerState.MOVING);
+                        SetDestination(GetRandomDestination());
+                    }
+
                     if (CheckIfEnemiesAreStronger())
                     {
                         SetPlayerState(PlayerState.ESCAPING);
@@ -49,7 +59,7 @@ public class JoanAI : BaseAI
                     else
                     {
                         SetPlayerState(PlayerState.MOVING);
-                        SetDestination(GetRandomDestination().position);
+                        SetDestination(GetRandomDestination());
                     }
                     break;
 
@@ -57,7 +67,7 @@ public class JoanAI : BaseAI
                     
                     if (!CheckHasDestination())
                     {
-                        SetDestination(GetRandomDestination().position);
+                        SetDestination(GetRandomDestination());
                     }
                     else
                     {

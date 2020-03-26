@@ -18,9 +18,9 @@
         Player.setDestination(destination);
     }
 
-    public Transform GetRandomDestination()
+    public Vector3 GetRandomDestination()
     {
-        return Graph.Instance.returnRandomNode();
+        return Graph.Instance.returnRandomNode().position;
     }
 
     public bool CheckIfVisibleEnemiesNear()
@@ -71,6 +71,11 @@
     public float GetAgentRemainingDistance()
     {
         return Player.GetAgentRemainingDistance();
+    }
+
+    public bool ChaseTargetExists()
+    {
+        return Player.ChaseTargetExists();
     }
 
     #endregion }

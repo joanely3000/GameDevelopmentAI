@@ -9,8 +9,6 @@ public enum PlayerState
     ESCAPING,
     CHASING,
     INLIGHT
-
-
 }
 public class PlayerController : MonoBehaviour
 {
@@ -115,12 +113,14 @@ public class PlayerController : MonoBehaviour
         playerState = PlayerState.MOVING;
     }
 
+    //-- Sets the AI for the player --//
     public void SetAI(BaseAI _ai)
     {
         ai = _ai;
         ai.Player = this;
     }
 
+    //-- Starts the Game --//
     public void StartBattle()
     {
         StartCoroutine(ai.RunAI());
@@ -128,8 +128,9 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        visibleEnemies.Clear();
+        visibleEnemies.Clear(); //-- Clear visible enemy --//
 
+        //-- Finds visible enemies --//
         for (int i = 0; i < inRangeEnemies.Count; i++)
         {
             Vector3 direction = (inRangeEnemies[i].transform.position - transform.position).normalized;
@@ -146,13 +147,14 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
     void LateUpdate()
     {
         DrawLight();
     }
 
     #region Trigger Manage
+
+    //-- Detects when players are in range of the player --//
     private void OnTriggerEnter(Collider other)
     {
         if(other.tag == "Player")
@@ -167,17 +169,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void OnTriggerStay(Collider other)
-    {
-        for (int i = 0; i < inRangeEnemies.Count; i++)
-        {
-            if(inRangeEnemies[i] == null)
-            {
-                inRangeEnemies.Remove(inRangeEnemies[i]);
-            }
-        }
-    }
-
+    //-- Removes the enemy if exits the trigger --//
     private void OnTriggerExit(Collider other)
     {
         if(other.tag == "Player" && inRangeEnemies.Contains(other.gameObject))
@@ -218,7 +210,6 @@ public class PlayerController : MonoBehaviour
         return agent.remainingDistance;
     }
 
-    //-- Checks the player's State --//
     public PlayerState CheckState()
     {
         return playerState;
@@ -227,6 +218,11 @@ public class PlayerController : MonoBehaviour
     public void SetPlayerState(PlayerState ps)
     {
         playerState = ps;
+    }
+
+    public bool ChaseTargetExists()
+    {
+        return chaseTarget != null;
     }
 
     #endregion
@@ -319,6 +315,8 @@ public class PlayerController : MonoBehaviour
     #region Functions
 
     #region Light Functions
+
+    //-- Finds players inside the light --//
     private void FindVisibleTargets()
     {
         inLightEnemies.Clear();
@@ -346,6 +344,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    //-- Draws the light --//
     private void DrawLight()
     {
         int stepCount = Mathf.RoundToInt(viewAngle * meshResolution);
@@ -462,6 +461,7 @@ public class PlayerController : MonoBehaviour
         return visibleEnemies.Count > 0;
     }
 
+    //-- Checks if the enemies are near --//
     public bool CheckIfEnemiesNear()
     {
         for (int i = 0; i < inRangeEnemies.Count; i++)
@@ -520,6 +520,7 @@ public class PlayerController : MonoBehaviour
         return hit.position;
     }
 
+    //-- Get the enemy position to chase --//
     public Vector3 GetChasePosition()
     {
         chaseTarget = inRangeEnemies[0].transform;
@@ -527,9 +528,11 @@ public class PlayerController : MonoBehaviour
         return chaseTarget.position;
     }
 
+    //-- Removes the enemy from the lists when it dies --//
     public void EnemyKilled(GameObject enemy)
     {
         inRangeEnemies.Remove(enemy);
+        chaseTarget = null;
     }
 
     #endregion
