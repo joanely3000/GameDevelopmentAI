@@ -28,6 +28,7 @@ public class CompetitorManager : MonoBehaviour
     void Start()
     {
         cameraController = GetComponent<CameraController>();
+        cameraController.AddCamera(Camera.main.gameObject);
 
         BaseAI[] aiArray = new BaseAI[] {
             new GwendalAI(),

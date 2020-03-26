@@ -12,7 +12,7 @@ public class CameraController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        cameras.Add(mainCamera);
+        //cameras.Add(mainCamera);
     }
 
     // Update is called once per frame
