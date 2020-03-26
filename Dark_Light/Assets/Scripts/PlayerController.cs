@@ -9,8 +9,9 @@ public enum PlayerState
     ESCAPING,
     CHASING,
     INLIGHT
-}
 
+
+}
 public class PlayerController : MonoBehaviour
 {
     #region Structs
@@ -42,8 +43,6 @@ public class PlayerController : MonoBehaviour
         }
     }
     #endregion
-
-    
 
     //----------------------------------//
     //---------Public Variables---------//
@@ -91,7 +90,8 @@ public class PlayerController : MonoBehaviour
 
     private Vector3 destination;
 
-    private GameObject atacker;
+    private Transform chaseTarget;
+    private PlayerController atacker;
 
     private PlayerState playerState;
     
@@ -139,21 +139,10 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        //If the player arrives to the destination 
-        if(Vector3.Distance(transform.position, destination) < 0.2f)
-        {
-            hasDestination = false;
-        }
-
         //Player damaging all the players in his light
         for (int i = 0; i < inLightEnemies.Count; i++)
         {
-            float health = inLightEnemies[i].GetComponent<HealthSystem>().GetDamage();
-
-            if(health <= 0)
-            {
-                inRangeEnemies.Remove(inLightEnemies[i].gameObject);
-            }
+            inLightEnemies[i].GetComponent<HealthSystem>().GetDamage(this);
         }
     }
 
@@ -163,6 +152,7 @@ public class PlayerController : MonoBehaviour
         DrawLight();
     }
 
+    #region Trigger Manage
     private void OnTriggerEnter(Collider other)
     {
         if(other.tag == "Player")
@@ -196,6 +186,8 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    #endregion
+
     #region getters & setters
 
     public void setMapSize(float size) {mapSize = size;}
@@ -206,9 +198,24 @@ public class PlayerController : MonoBehaviour
 
     public Vector3 getDestination() { return destination; }
 
-    public void setDestination(Vector3 position) { 
-        destination = position;
+    public void setDestination(Vector3 position) {
+        agent.SetDestination(position);
         hasDestination = true;
+    }
+
+    public Vector3 GetAgentVelocity()
+    {
+        return agent.velocity;
+    }
+
+    public void SetAgentVelocity(Vector3 velocity)
+    {
+        agent.velocity = velocity;
+    }
+
+    public float GetAgentRemainingDistance()
+    {
+        return agent.remainingDistance;
     }
 
     //-- Checks the player's State --//
@@ -310,6 +317,8 @@ public class PlayerController : MonoBehaviour
     #endregion
 
     #region Functions
+
+    #region Light Functions
     private void FindVisibleTargets()
     {
         inLightEnemies.Clear();
@@ -445,14 +454,7 @@ public class PlayerController : MonoBehaviour
 
         return new EdgeInfo(minPoint, maxPoint);
     }
-
-    public void GoToDestination()
-    {
-        if (hasDestination)
-        {
-            agent.SetDestination(destination);
-        }
-    }
+    #endregion
 
     //-- Checks if the player is seeing an enemy --//
     public bool CheckIfThereAreVisibleEnemies()
@@ -488,13 +490,6 @@ public class PlayerController : MonoBehaviour
         return false;
     }
 
-    //-- Sets the destination to a point to escape --//
-    public void SetEscapeDestination()
-    {
-        Vector3 scapingPosition = GetEscapeDirection();
-        setDestination(transform.position + scapingPosition);
-    }
-
     //-- Calculates the scaping direction --//
     public Vector3 GetEscapeDirection()
     {
@@ -524,5 +519,18 @@ public class PlayerController : MonoBehaviour
 
         return hit.position;
     }
+
+    public Vector3 GetChasePosition()
+    {
+        chaseTarget = inRangeEnemies[0].transform;
+
+        return chaseTarget.position;
+    }
+
+    public void EnemyKilled(GameObject enemy)
+    {
+        inRangeEnemies.Remove(enemy);
+    }
+
     #endregion
 }

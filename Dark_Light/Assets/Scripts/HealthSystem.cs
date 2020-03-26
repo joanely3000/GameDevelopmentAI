@@ -18,8 +18,6 @@ public class HealthSystem : MonoBehaviour
     
     public float cdTimer; //cd timer
 
-    private GameObject enemy;
-
     // Start is called before the first frame update
     void Awake()
     {
@@ -47,16 +45,16 @@ public class HealthSystem : MonoBehaviour
         }*/
     }
 
-    public float GetDamage()
+    public void GetDamage(PlayerController atacker)
     {
         cdTimer = 0;
         currentHealth -= Time.deltaTime * damageTaken;
 
         if (currentHealth <= 0)
         {
+            atacker.EnemyKilled(gameObject);
             Destroy(gameObject, .5f);
         }
-        return currentHealth;
 
         /*if (enemy.GetComponent<PlayerLight>().visibleEnemies.Contains(this.GetComponent<Transform>()) &&
         currentHealth > 0) //In light

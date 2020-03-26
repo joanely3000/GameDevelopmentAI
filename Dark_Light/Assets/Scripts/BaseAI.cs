@@ -10,13 +10,12 @@
     public bool CheckHasDestination()
     {
         return Player.getHasDestination();
+    }     public void SetHasDestination(bool value)
+    {
+        Player.setHasDestination(value);
     }      public void SetDestination(Vector3 destination)
     {
         Player.setDestination(destination);
-    } 
-    public void GoToDestination()
-    {
-        Player.GoToDestination();
     }
 
     public Transform GetRandomDestination()
@@ -39,10 +38,9 @@
         return Player.AnyEnemyIsStronger();
     }
 
-    public void SetEscapeDestination()
+    public Vector3 GetEscapeDestination()
     {
-        Debug.Log("Soy " + Player.gameObject.name + ", busco destino de escape");
-        Player.SetEscapeDestination();
+        return Player.GetEscapeDirection();
     }
 
     public PlayerState CheckPlayerState()
@@ -54,4 +52,25 @@
     {
         Player.SetPlayerState(state);
     }
+
+    public Vector3 GetChasePosition()
+    {
+        return Player.GetChasePosition();
+    }
+
+    public Vector3 GetAgentVelocity()
+    {
+        return Player.GetAgentVelocity();
+    }
+
+    public void SetAgentVelocity(Vector3 velocity)
+    {
+        Player.SetAgentVelocity(velocity);
+    }
+
+    public float GetAgentRemainingDistance()
+    {
+        return Player.GetAgentRemainingDistance();
+    }
+
     #endregion }

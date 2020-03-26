@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class JoanAI : BaseAI
 {
+    private float stopSpeed = 0.1f;
+
+    private float minDistChasing = 2f;
+
     public override IEnumerator RunAI()
     {
         while (true)
@@ -11,14 +15,36 @@ public class JoanAI : BaseAI
             switch (CheckPlayerState())
             {
                 case PlayerState.CHASING:
+                    if (GetAgentRemainingDistance() < minDistChasing)
+                    {
+                        SetAgentVelocity(Vector3.zero);
+                    }
+
+                    if (CheckIfEnemiesAreStronger())
+                    {
+                        SetPlayerState(PlayerState.ESCAPING);
+                        SetDestination(GetEscapeDestination());
+                    }
                     break;
 
                 case PlayerState.ESCAPING:
-                    Debug.Log("Estoy escapando");
+                    if (GetAgentVelocity().magnitude < stopSpeed)
+                    {
+                        SetHasDestination(false);
+                    }
+
                     if (CheckIfEnemiesNear())
                     {
-                        SetEscapeDestination();
-                        GoToDestination();
+                        if (CheckIfEnemiesAreStronger())
+                        {
+                            SetDestination(GetEscapeDestination());
+                        }
+                        else
+                        {
+                            SetPlayerState(PlayerState.CHASING);
+                            SetDestination(GetChasePosition());
+                        }
+                        
                     }
                     else
                     {
@@ -28,30 +54,35 @@ public class JoanAI : BaseAI
                     break;
 
                 case PlayerState.MOVING:
+                    
                     if (!CheckHasDestination())
                     {
                         SetDestination(GetRandomDestination().position);
                     }
                     else
                     {
-                        GoToDestination();
+                        if (GetAgentVelocity().magnitude < stopSpeed)
+                        {
+                            SetHasDestination(false);
+                        }
                     }
                     break;
 
                 case PlayerState.INLIGHT:
-                    Debug.Log("Estoy en la luuus");
-                    SetPlayerState(PlayerState.ESCAPING);
-                    SetEscapeDestination();
+                    if (CheckIfEnemiesAreStronger())
+                    {
+                        SetPlayerState(PlayerState.ESCAPING);
+                        SetDestination(GetEscapeDestination());
+                    }
+                    else
+                    {
+                        SetDestination(GetChasePosition());
+                    }
+                    
                     break;
             }
 
             yield return null;
-
-            /*
-           yield return Ahead(2);
-           yield return TurnLeft(180);
-           yield return Left(4);
-           yield return TurnRight(90);*/
         }
     }
 }

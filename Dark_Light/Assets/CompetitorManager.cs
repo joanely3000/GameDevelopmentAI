@@ -26,7 +26,7 @@ public class CompetitorManager : MonoBehaviour
     void Start()
     {
         BaseAI[] aiArray = new BaseAI[] {
-            new JoanAI(),
+            new GwendalAI(),
             new JoanAI(),
             new JoanAI(),
             new JoanAI()
