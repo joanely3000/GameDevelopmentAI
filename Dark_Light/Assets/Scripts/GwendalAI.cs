@@ -4,16 +4,74 @@ using UnityEngine;
 
 public class GwendalAI : BaseAI
 {
+    private float stopSpeed = 0.1f;
+
+    private float minDistChasing = 2f;
+
     public override IEnumerator RunAI()
     {
         while (true)
         {
-            yield return Ahead(10);
-            yield return Back(10);
-            yield return Left(1);
-            yield return Right(1);
-            yield return TurnRight(180);
-            yield return TurnLeft(180);
+            Debug.Log(CheckPlayerState());
+            switch (CheckPlayerState())
+            {
+                case PlayerState.CHASING:
+                    if (CheckIfEnemiesNear())
+                        SetDestination(GetChasePosition());
+                    else
+                        SetPlayerState(PlayerState.MOVING);
+                    break;
+                case PlayerState.ESCAPING:
+                    if (CheckIfEnemiesNear())
+                    {
+                        if (CheckIfEnemiesAreStrongerNear())
+                        {
+                            SetDestination(GetEscapeDestination());
+                        }
+                        else
+                        {
+                            SetPlayerState(PlayerState.CHASING);
+                        }
+
+                    }
+                    break;
+                case PlayerState.INLIGHT:
+                    if (CheckIfEnemiesNear())
+                    {
+                        if (CheckIfEnemiesAreStrongerNear())
+                        {
+                            SetPlayerState(PlayerState.ESCAPING);
+                        }
+                        else
+                        {
+                            SetPlayerState(PlayerState.CHASING);
+                        }
+                    }
+                    else
+                        SetPlayerState(PlayerState.MOVING);
+                    break;
+                case PlayerState.MOVING:
+                    if (CheckIfEnemiesNear())
+                    {
+                        SetPlayerState(PlayerState.CHASING);
+                    }
+                    else
+                    {
+                        if (!CheckHasDestination())
+                        {
+                            SetDestination(GetRandomDestination());
+                        }
+                        else
+                        {
+                            if (GetAgentVelocity().magnitude < stopSpeed)
+                            {
+                                SetHasDestination(false);
+                            }
+                        }
+                    }
+                    break;
+            }
+            yield return null;
         }
     }
 }

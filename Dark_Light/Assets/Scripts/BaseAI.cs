@@ -28,6 +28,11 @@
         return Player.CheckIfThereAreVisibleEnemies();
     }
 
+    public bool CheckIfEnemiesAreStrongerNear()
+    {
+        return Player.AnyEnemyIsStrongerNear();
+    }
+
     public bool CheckIfEnemiesNear()
     {
         return Player.CheckIfEnemiesNear();

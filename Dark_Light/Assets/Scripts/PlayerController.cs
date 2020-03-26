@@ -476,13 +476,28 @@ public class PlayerController : MonoBehaviour
         return false;
     }
 
-    //-- Checks if any enemy in range is stronger than the player --//
+    //-- Checks if any enemy in visible is stronger than the player --//
     public bool AnyEnemyIsStronger()
     {
         for (int i = 0; i < visibleEnemies.Count; i++)
         {
             HealthSystem enemyHealth = visibleEnemies[i].GetComponent<HealthSystem>();
-            if(enemyHealth != null && enemyHealth.health > _myHeathSystem.health)
+            if (enemyHealth != null && enemyHealth.currentHealth > _myHeathSystem.currentHealth)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
+
+    //-- Checks if any enemy near is stronger than the player --//
+    public bool AnyEnemyIsStrongerNear()
+    {
+        for (int i = 0; i < inRangeEnemies.Count; i++)
+        {
+            HealthSystem enemyHealth = inRangeEnemies[i].GetComponent<HealthSystem>();
+            if (enemyHealth != null && enemyHealth.currentHealth > _myHeathSystem.currentHealth)
             {
                 return true;
             }
@@ -523,9 +538,11 @@ public class PlayerController : MonoBehaviour
     //-- Get the enemy position to chase --//
     public Vector3 GetChasePosition()
     {
-        chaseTarget = inRangeEnemies[0].transform;
-
-        return chaseTarget.position;
+        chaseTarget = null;
+        if (inRangeEnemies.Count != 0)
+            chaseTarget = inRangeEnemies[0].transform;
+    
+            return chaseTarget.position;
     }
 
     //-- Removes the enemy from the lists when it dies --//
