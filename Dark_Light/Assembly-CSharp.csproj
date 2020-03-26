@@ -82,7 +82,6 @@
     <Compile Include="Assets\Scripts\TemporaryMovement.cs" />
     <Compile Include="Assets\TutorialInfo\Scripts\Readme.cs" />
     <None Include="Assets\Easy DG Assets 1 - Wood + Stone\README.txt" />
-    <None Include="Assets\SkySerie Freebie\Hdri setup.txt" />
     <Reference Include="Unity.RenderPipeline.Universal.ShaderLibrary">
       <HintPath>D:/Uni/Erasmus/Game Development/Projects/GameDevelopmentAI/Dark_Light/Library/ScriptAssemblies/Unity.RenderPipeline.Universal.ShaderLibrary.dll</HintPath>
     </Reference>
