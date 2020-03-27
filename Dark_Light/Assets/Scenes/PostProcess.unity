@@ -6346,6 +6346,8 @@ MonoBehaviour:
   PlayerUI: {fileID: 2105002765716392677, guid: 29f3343465ed61e428d5ef0e0ae215e3,
     type: 3}
   HealthUIPlace: {fileID: 1765049262}
+  playerCamera: {fileID: 5876488713167681257, guid: 6f7b29325fede6b4583e697da820b4a6,
+    type: 3}
 --- !u!4 &1953509735
 Transform:
   m_ObjectHideFlags: 0
