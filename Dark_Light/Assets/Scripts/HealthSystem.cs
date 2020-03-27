@@ -53,8 +53,7 @@ public class HealthSystem : MonoBehaviour
         if (currentHealth <= 0)
         {
             atacker.EnemyKilled(gameObject);
-            Destroy(gameObject, .1f);
-
+            Destroy(gameObject, .5f);
         }
 
         /*if (enemy.GetComponent<PlayerLight>().visibleEnemies.Contains(this.GetComponent<Transform>()) &&

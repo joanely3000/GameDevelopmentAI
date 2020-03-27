@@ -20,24 +20,16 @@ public class CompetitorManager : MonoBehaviour
     public GameObject PlayerUI;
     public GameObject HealthUIPlace;
 
-    public GameObject playerCamera;
-
     private List<PlayerController> playerList = new List<PlayerController>();
     private string[] names = { "Gwendal", "Joan", "Jesus", "Random" };
-
-    private CameraController camController;
 
     // Start is called before the first frame update
     void Start()
     {
-        camController=  GetComponent<CameraController>();
-
-        camController.AddCamera(Camera.main.gameObject);
-
         BaseAI[] aiArray = new BaseAI[] {
             new GwendalAI(),
             new JoanAI(),
-            new JesusAI(),
+            new JoanAI(),
             new JoanAI()
         };
 
@@ -54,16 +46,6 @@ public class CompetitorManager : MonoBehaviour
             playerUI.GetComponentInChildren<ProgressBar>().Name.text = names[i];
             playerUI.GetComponentInChildren<ProgressBar>().Color.color = Colors[i];
 
-            //Set players camera
-            GameObject cam = Instantiate(playerCamera, player.transform.position, Quaternion.identity);
-            FollowPlayer fp = cam.GetComponent<FollowPlayer>();
-            if(fp != null)
-            {
-                fp.SetPlayer(player);
-            }
-            cam.GetComponent<AudioListener>().enabled = false;
-            cam.SetActive(false);
-            camController.AddCamera(cam);
 
             //Set the color for the light of the player
             PlayerController playerController = player.GetComponent<PlayerController>();

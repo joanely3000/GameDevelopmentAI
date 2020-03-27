@@ -93,29 +93,4 @@
         return Player.GetStrongestEnemyPosition();
     }
 
-    public void SetFocus()
-    {
-        Player.SetFocus();
-    }
-    public GameObject GetFocus()
-    {
-        return Player.GetFocus();
-    }
-    public Vector3 GetFocusPositionIfNear()
-    {
-        return Player.GetFocusPositionIfNear();
-    }
-    public bool CheckIfFocused()
-    {
-        return Player.CheckIfFocused();
-    }
-    public bool CheckIfEnemyIsMyFocus()
-    {
-        return Player.CheckIfEnemyIsMyFocus();
-    }
-    public bool CheckIfFocusNear()
-    {
-        return Player.CheckIfFocusNear();
-    }
-
     #endregion }
