@@ -23,6 +23,11 @@
         return Graph.Instance.returnRandomNode().position;
     }
 
+    public Vector3 GetFarestPoint(Vector3 enemyPos)
+    {
+        return Graph.Instance.GetFarestPoint(enemyPos);
+    }
+
     public bool CheckIfVisibleEnemiesNear()
     {
         return Player.CheckIfThereAreVisibleEnemies();
@@ -81,6 +86,11 @@
     public bool ChaseTargetExists()
     {
         return Player.ChaseTargetExists();
+    }
+
+    public Vector3 GetStrongestEnemyPosition()
+    {
+        return Player.GetStrongestEnemyPosition();
     }
 
     #endregion }

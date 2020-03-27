@@ -522,6 +522,22 @@ public class PlayerController : MonoBehaviour
         return FindPositionInNavmesh(scapeDirection *= -1);
     }
 
+    public Vector3 GetStrongestEnemyPosition()
+    {
+        float health = 0f;
+        int index = 0;
+
+        for (int i = 0; i < inRangeEnemies.Count; i++)
+        {
+            if(inRangeEnemies[i].GetComponent<HealthSystem>().currentHealth > health)
+            {
+                index = i;
+            }
+        }
+
+        return inRangeEnemies[index].transform.position;
+    }
+
     //-- Finds the destination point in the navmesh --//
     private Vector3 FindPositionInNavmesh(Vector3 scapeDirection)
     {

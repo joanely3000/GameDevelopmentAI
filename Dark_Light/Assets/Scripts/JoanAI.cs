@@ -47,7 +47,10 @@ public class JoanAI : BaseAI
                     {
                         if (CheckIfEnemiesAreStronger())
                         {
-                            SetDestination(GetEscapeDestination());
+                            if (!CheckHasDestination())
+                            {
+                                SetDestination(GetFarestPoint(GetStrongestEnemyPosition()));
+                            }
                         }
                         else
                         {
@@ -82,11 +85,14 @@ public class JoanAI : BaseAI
                     if (CheckIfEnemiesAreStronger())
                     {
                         SetPlayerState(PlayerState.ESCAPING);
-                        SetDestination(GetEscapeDestination());
+                        SetDestination(GetFarestPoint(GetStrongestEnemyPosition()));
                     }
                     else
                     {
-                        SetDestination(GetChasePosition());
+                        if (ChaseTargetExists())
+                        {
+                            SetDestination(GetChasePosition());
+                        }
                     }
                     
                     break;
