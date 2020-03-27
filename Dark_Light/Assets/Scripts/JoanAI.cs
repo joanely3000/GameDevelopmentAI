@@ -91,7 +91,13 @@ public class JoanAI : BaseAI
                     {
                         if (ChaseTargetExists())
                         {
+                            SetPlayerState(PlayerState.CHASING);
                             SetDestination(GetChasePosition());
+                        }
+                        else
+                        {
+                            SetPlayerState(PlayerState.MOVING);
+                            SetDestination(GetRandomDestination());
                         }
                     }
                     

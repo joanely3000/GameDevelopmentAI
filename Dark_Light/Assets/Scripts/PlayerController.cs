@@ -92,7 +92,13 @@ public class PlayerController : MonoBehaviour
     private PlayerController atacker;
 
     private PlayerState playerState;
-    
+
+    private GameObject focus;//J
+    private GameObject[] activeEnemies;
+    private Vector3 focusPos;
+    private Vector3[] pathPos = new Vector3[4];
+    private bool[] pathPosVisited = new bool[4];
+
 
     // Start is called before the first frame update
     void Awake()
@@ -565,7 +571,93 @@ public class PlayerController : MonoBehaviour
     public void EnemyKilled(GameObject enemy)
     {
         inRangeEnemies.Remove(enemy);
+        SetFocus();
         chaseTarget = null;
+    }
+
+    //-- Choose an enemy to focus for Jesus' AI --//
+    public void SetFocus()
+    {
+        bool selected = false;
+        int random;
+
+        activeEnemies = GameObject.FindGameObjectsWithTag("Player");
+        if (activeEnemies.Length > 2)
+        {
+            while (!selected)
+            {
+                random = Random.Range(0, activeEnemies.Length);
+                if (activeEnemies[random].name != "Jesus" && activeEnemies[random]!= focus)
+                {
+
+                    focus = activeEnemies[random];
+                    Debug.Log(focus.name);
+                    selected = true;
+                }
+            }
+        }
+        else
+        {
+            foreach (GameObject element in activeEnemies)
+            {
+                if (element.name != "Jesus")
+                {
+                    focus = element;
+                }
+            }
+        }
+
+    }
+
+    public GameObject GetFocus()
+    {
+        return focus;
+    }
+
+    public bool CheckIfFocused()
+    {
+        bool targetFocused = false;
+        for (int i = 0; i < visibleEnemies.Count; i++)
+        {
+            if (visibleEnemies[i] == focus)
+            {
+                targetFocused = true;
+            }
+        }
+        return targetFocused;
+    }
+
+    public bool CheckIfEnemyIsMyFocus()
+    {
+        bool check = false;
+        if (focus.GetComponent<PlayerController>().visibleEnemies.Contains(gameObject))
+        {
+            check = true;
+        }
+        return check;
+    }
+
+    public bool CheckIfFocusNear()
+    {
+        Debug.Log("Entra funcion");
+        bool check = false;
+        for (int i = 0; i < inRangeEnemies.Count; i++)
+        {
+            if (inRangeEnemies[i] == focus)
+            {
+                Debug.Log("Entra focus");
+                check = true;
+                chaseTarget = inRangeEnemies[i].transform;
+                focusPos = chaseTarget.position;
+                break;
+            }
+        }
+        return check;
+    }
+
+    public Vector3 GetFocusPositionIfNear()
+    {
+        return focusPos;
     }
 
     #endregion
