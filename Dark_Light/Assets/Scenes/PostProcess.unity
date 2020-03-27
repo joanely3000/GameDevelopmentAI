@@ -6342,6 +6342,15 @@ MonoBehaviour:
   - {fileID: 2100000, guid: 2c227331494d6874eb8d91f7b9ee605b, type: 2}
   - {fileID: 2100000, guid: f666a27d5bf47b642a87df26d672b7e5, type: 2}
   - {fileID: 2100000, guid: ed91627bf958a1d4dbe1bdf43fe32987, type: 2}
+  Colors:
+  - serializedVersion: 2
+    rgba: 4281203711
+  - serializedVersion: 2
+    rgba: 4281204563
+  - serializedVersion: 2
+    rgba: 4290457087
+  - serializedVersion: 2
+    rgba: 4294923821
   UIPosition: []
   PlayerUI: {fileID: 2105002765716392677, guid: 29f3343465ed61e428d5ef0e0ae215e3,
     type: 3}

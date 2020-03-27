@@ -9,6 +9,7 @@ public class ProgressBar : MonoBehaviour
     public Image mask;
     public Text lifeText;
     public Text Name;
+    public Image Color;
 
     [HideInInspector]
     public HealthSystem healthSystem;

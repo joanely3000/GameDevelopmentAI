@@ -14,6 +14,7 @@ public class CompetitorManager : MonoBehaviour
     [Header("Spawn Points")]
     public Transform[] SpawnPoints = null;
     public Material[] Materials;
+    public Color32[] Colors;
 
     public Transform[] UIPosition = null;
     public GameObject PlayerUI;
@@ -43,6 +44,7 @@ public class CompetitorManager : MonoBehaviour
             playerUI.transform.SetParent(HealthUIPlace.transform);
             playerUI.GetComponentInChildren<ProgressBar>().setHealthSystem(player.GetComponent<HealthSystem>());
             playerUI.GetComponentInChildren<ProgressBar>().Name.text = names[i];
+            playerUI.GetComponentInChildren<ProgressBar>().Color.color = Colors[i];
 
 
             //Set the color for the light of the player
