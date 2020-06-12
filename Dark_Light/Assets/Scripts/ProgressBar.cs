@@ -17,7 +17,7 @@ public class ProgressBar : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     public void setHealthSystem(HealthSystem healthSystem)

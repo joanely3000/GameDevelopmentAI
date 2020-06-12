@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CompetitorManager : MonoBehaviour
 {
@@ -19,6 +20,8 @@ public class CompetitorManager : MonoBehaviour
     public Transform[] UIPosition = null;
     public GameObject PlayerUI;
     public GameObject HealthUIPlace;
+    public Font font;
+    public Text winnerText;
 
     private List<PlayerController> playerList = new List<PlayerController>();
     private string[] names = { "Gwendal", "Joan", "Jesus", "Random" };
@@ -45,6 +48,8 @@ public class CompetitorManager : MonoBehaviour
             playerUI.GetComponentInChildren<ProgressBar>().setHealthSystem(player.GetComponent<HealthSystem>());
             playerUI.GetComponentInChildren<ProgressBar>().Name.text = names[i];
             playerUI.GetComponentInChildren<ProgressBar>().Color.color = Colors[i];
+            playerUI.GetComponentInChildren<ProgressBar>().Name.font = font;
+            playerUI.GetComponentInChildren<ProgressBar>().lifeText.font = font;
 
 
             //Set the color for the light of the player
@@ -56,6 +61,7 @@ public class CompetitorManager : MonoBehaviour
 
             //Add to the player list
             playerList.Add(playerController);
+
         }
     }
 
