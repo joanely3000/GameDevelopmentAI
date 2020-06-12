@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class CompetitorManager : MonoBehaviour
 {
@@ -75,5 +76,14 @@ public class CompetitorManager : MonoBehaviour
                 player.StartBattle();
             }
         }
+        if (winnerText.text!="") //it means that there's a winner
+        {
+            StartCoroutine(ChangingScene());
+        }
+    }
+    IEnumerator ChangingScene()
+    {
+        yield return new WaitForSeconds(3.0f);
+        SceneManager.LoadScene(0);
     }
 }

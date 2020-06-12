@@ -6,7 +6,6 @@ public class CameraController : MonoBehaviour
 {
     public GameObject mainCamera;
     public List<GameObject> cameras = new List<GameObject>();
-    public CompetitorManager competitorManager;
     private int activeCamera = 0;
     private GameObject lastPlayer;
     // Start is called before the first frame update
