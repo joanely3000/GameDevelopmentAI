@@ -12,7 +12,6 @@ public class GwendalAI : BaseAI
     {
         while (true)
         {
-            Debug.Log(CheckPlayerState());
             switch (CheckPlayerState())
             {
                 case PlayerState.CHASING:

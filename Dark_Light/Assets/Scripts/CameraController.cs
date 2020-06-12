@@ -18,7 +18,17 @@ public class CameraController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (GameObject.FindGameObjectsWithTag("Player").Length == 1)
+        {
+            if (lastPlayer == null)
+            {
+                lastPlayer = GameObject.FindGameObjectWithTag("Player");
+                SwitchCamera(1);
+                GetComponent<CompetitorManager>().winnerText.text = lastPlayer.name + " wins!";
+            }
+            cameras[1].transform.position = new Vector3(lastPlayer.transform.position.x, cameras[1].transform.position.y, lastPlayer.transform.position.z);
 
+        }
         
     }
 

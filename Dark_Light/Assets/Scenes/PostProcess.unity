@@ -6472,7 +6472,7 @@ MonoBehaviour:
     type: 3}
   HealthUIPlace: {fileID: 1765049262}
   font: {fileID: 12800000, guid: 73b38aebffb805d478ffd99396b6efe3, type: 3}
-  winnerText: {fileID: 0}
+  winnerText: {fileID: 2022220612}
 --- !u!4 &1953509735
 Transform:
   m_ObjectHideFlags: 0
